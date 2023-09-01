@@ -24,20 +24,21 @@ namespace APU
                 string steampath = SteamPath();
                 if (steampath != "")
                 {
-                    Properties.Settings.Default.GamePath = steampath.Replace("/", "\\") + @"\steamapps\common\Car Mechanic Simulator 2018";
-                    Properties.Settings.Default.ShopPath = steampath.Replace("/", "\\") + @"\steamapps\workshop\content\645630";
+                    Properties.Settings.Default.GamePath = steampath.Replace("/", "\\") + @"\steamapps\common\Car Mechanic Simulator 2021";
+                    Properties.Settings.Default.ShopPath = steampath.Replace("/", "\\") + @"\steamapps\workshop\content\1190000";
                     Properties.Settings.Default.Save();
                 }
-                FolderBrowserDialog fbd = new FolderBrowserDialog();
-                fbd.Description = "Select Your Car Mechanic Simulator 2018 Installation Folder.";
+                /*FolderBrowserDialog fbd = new FolderBrowserDialog();
+                fbd.Description = "Select Your Car Mechanic Simulator 2021 Installation Folder.";
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
                     Properties.Settings.Default.GamePath = fbd.SelectedPath;
                     Properties.Settings.Default.Save();
-                    fbd.Description = "Select A Folder With Any Additional (Workshop) Cars, Or Cancel To Continue.";
-                    if (fbd.ShowDialog() == DialogResult.OK)
+                    FolderBrowserDialog fbd1 = new FolderBrowserDialog();
+                    fbd1.Description = "Select A Folder With Any Additional (Workshop) Cars, Or Cancel To Continue.";
+                    if (fbd1.ShowDialog() == DialogResult.OK)
                     {
-                        Properties.Settings.Default.ShopPath = fbd.SelectedPath;
+                        Properties.Settings.Default.ShopPath = fbd1.SelectedPath;
                     }
                     Properties.Settings.Default.Save();
                     Application.Run(new FormMain());
@@ -45,7 +46,27 @@ namespace APU
                 else
                 {
                     Application.Exit();
+                }*/
+                FolderBrowserDialog f = new FolderBrowserDialog();
+                f.Description = "Select Your Car Mechanic Simulator 2021 Installation Folder.";
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    Properties.Settings.Default.GamePath = f.SelectedPath;
                 }
+                else
+                    Environment.Exit(404);
+
+                /*FolderBrowserDialog f1 = new FolderBrowserDialog();*/
+                f.Description = "Select A Folder With Any Additional (Workshop) Cars, Or Cancel To Continue.";
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    Properties.Settings.Default.ShopPath = f.SelectedPath;
+                }
+                else
+                    Environment.Exit(404);
+
+                Properties.Settings.Default.Save();
+                Application.Run(new FormMain());
             }
             else
             {

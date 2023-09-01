@@ -51,6 +51,8 @@
             this.chkSalon = new System.Windows.Forms.CheckBox();
             this.chkAuction = new System.Windows.Forms.CheckBox();
             this.lblCarName = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.gbxPlaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUnique)).BeginInit();
@@ -190,6 +192,7 @@
             // lvwCars
             // 
             this.lvwCars.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lvwCars.HideSelection = false;
             this.lvwCars.Location = new System.Drawing.Point(0, 25);
             this.lvwCars.Name = "lvwCars";
             this.lvwCars.Size = new System.Drawing.Size(518, 92);
@@ -200,6 +203,8 @@
             // 
             // gbxPlaces
             // 
+            this.gbxPlaces.Controls.Add(this.label2);
+            this.gbxPlaces.Controls.Add(this.label1);
             this.gbxPlaces.Controls.Add(this.lblUnique);
             this.gbxPlaces.Controls.Add(this.nudUnique);
             this.gbxPlaces.Controls.Add(this.chkShed);
@@ -297,6 +302,24 @@
             this.lblCarName.Size = new System.Drawing.Size(0, 20);
             this.lblCarName.TabIndex = 13;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(241, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(241, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "label2";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,7 +333,7 @@
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "AllowedPlaces Utility For CMS2018";
+            this.Text = "AllowedPlaces Utility For CMS2021";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -345,6 +368,8 @@
         private System.Windows.Forms.Label lblCarName;
         private System.Windows.Forms.Label lblUnique;
         private System.Windows.Forms.NumericUpDown nudUnique;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

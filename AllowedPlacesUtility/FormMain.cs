@@ -119,7 +119,11 @@ namespace APU
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
-            foreach (var carpath in Directory.EnumerateDirectories(Properties.Settings.Default.GamePath + @"\cms2018_Data\StreamingAssets\Cars\"))
+            // Testing file address
+            label1.Text = Properties.Settings.Default.GamePath;
+            label2.Text = Properties.Settings.Default.ShopPath;
+
+            foreach (var carpath in Directory.EnumerateDirectories(Properties.Settings.Default.GamePath + @"\Car Mechanic Simulator 2021_Data\StreamingAssets\Cars\"))
             {
                 string cp = carpath + "\\";
                 string name = "Unnamed Car";
