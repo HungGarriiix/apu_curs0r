@@ -11,8 +11,9 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /[Uu]nityGenerated/
-/bin/
-/obj/
+
+bin/
+obj/
 
 # file on crash reports
 sysinfo.txt
