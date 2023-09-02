@@ -11,6 +11,9 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /[Uu]nityGenerated/
+/bin/
+/obj/
+
 # file on crash reports
 sysinfo.txt
 # Unity3D generated meta files
