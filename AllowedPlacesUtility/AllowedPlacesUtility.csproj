@@ -61,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="CarFilter.cs" />
+    <Compile Include="FileType.cs" />
+    <Compile Include="FileTypeSortMode.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

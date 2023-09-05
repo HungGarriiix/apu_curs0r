@@ -44,6 +44,12 @@
             this.tsbBarnsNone = new System.Windows.Forms.ToolStripButton();
             this.lvwCars = new System.Windows.Forms.ListView();
             this.gbxPlaces = new System.Windows.Forms.GroupBox();
+            this.gbxFilter = new System.Windows.Forms.GroupBox();
+            this.tbxNameFilter = new System.Windows.Forms.TextBox();
+            this.cmbNameFilter = new System.Windows.Forms.ComboBox();
+            this.lblFileTypeFilter = new System.Windows.Forms.Label();
+            this.lblPlacesFilter = new System.Windows.Forms.Label();
+            this.lblNameFilter = new System.Windows.Forms.Label();
             this.lblUnique = new System.Windows.Forms.Label();
             this.nudUnique = new System.Windows.Forms.NumericUpDown();
             this.chkShed = new System.Windows.Forms.CheckBox();
@@ -51,11 +57,15 @@
             this.chkSalon = new System.Windows.Forms.CheckBox();
             this.chkAuction = new System.Windows.Forms.CheckBox();
             this.lblCarName = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.rbFTFAll = new System.Windows.Forms.RadioButton();
+            this.panelFileTypeFilter = new System.Windows.Forms.Panel();
+            this.rbFTFVanilla = new System.Windows.Forms.RadioButton();
+            this.rbFTFMod = new System.Windows.Forms.RadioButton();
             this.toolStrip1.SuspendLayout();
             this.gbxPlaces.SuspendLayout();
+            this.gbxFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUnique)).BeginInit();
+            this.panelFileTypeFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -203,8 +213,7 @@
             // 
             // gbxPlaces
             // 
-            this.gbxPlaces.Controls.Add(this.label2);
-            this.gbxPlaces.Controls.Add(this.label1);
+            this.gbxPlaces.Controls.Add(this.gbxFilter);
             this.gbxPlaces.Controls.Add(this.lblUnique);
             this.gbxPlaces.Controls.Add(this.nudUnique);
             this.gbxPlaces.Controls.Add(this.chkShed);
@@ -218,6 +227,65 @@
             this.gbxPlaces.TabIndex = 12;
             this.gbxPlaces.TabStop = false;
             this.gbxPlaces.Text = "Allowed Places";
+            // 
+            // gbxFilter
+            // 
+            this.gbxFilter.Controls.Add(this.panelFileTypeFilter);
+            this.gbxFilter.Controls.Add(this.tbxNameFilter);
+            this.gbxFilter.Controls.Add(this.cmbNameFilter);
+            this.gbxFilter.Controls.Add(this.lblFileTypeFilter);
+            this.gbxFilter.Controls.Add(this.lblPlacesFilter);
+            this.gbxFilter.Controls.Add(this.lblNameFilter);
+            this.gbxFilter.Location = new System.Drawing.Point(207, 0);
+            this.gbxFilter.Name = "gbxFilter";
+            this.gbxFilter.Size = new System.Drawing.Size(311, 129);
+            this.gbxFilter.TabIndex = 12;
+            this.gbxFilter.TabStop = false;
+            this.gbxFilter.Text = "Filter";
+            // 
+            // tbxNameFilter
+            // 
+            this.tbxNameFilter.Location = new System.Drawing.Point(59, 19);
+            this.tbxNameFilter.Name = "tbxNameFilter";
+            this.tbxNameFilter.Size = new System.Drawing.Size(100, 20);
+            this.tbxNameFilter.TabIndex = 4;
+            this.tbxNameFilter.TextChanged += new System.EventHandler(this.tbxNameFilter_TextChanged);
+            // 
+            // cmbNameFilter
+            // 
+            this.cmbNameFilter.FormattingEnabled = true;
+            this.cmbNameFilter.Location = new System.Drawing.Point(168, 19);
+            this.cmbNameFilter.Name = "cmbNameFilter";
+            this.cmbNameFilter.Size = new System.Drawing.Size(121, 21);
+            this.cmbNameFilter.TabIndex = 3;
+            this.cmbNameFilter.SelectedIndexChanged += new System.EventHandler(this.cmbNameFilter_SelectedIndexChanged);
+            // 
+            // lblFileTypeFilter
+            // 
+            this.lblFileTypeFilter.AutoSize = true;
+            this.lblFileTypeFilter.Location = new System.Drawing.Point(7, 67);
+            this.lblFileTypeFilter.Name = "lblFileTypeFilter";
+            this.lblFileTypeFilter.Size = new System.Drawing.Size(46, 13);
+            this.lblFileTypeFilter.TabIndex = 2;
+            this.lblFileTypeFilter.Text = "File type";
+            // 
+            // lblPlacesFilter
+            // 
+            this.lblPlacesFilter.AutoSize = true;
+            this.lblPlacesFilter.Location = new System.Drawing.Point(7, 43);
+            this.lblPlacesFilter.Name = "lblPlacesFilter";
+            this.lblPlacesFilter.Size = new System.Drawing.Size(39, 13);
+            this.lblPlacesFilter.TabIndex = 1;
+            this.lblPlacesFilter.Text = "Places";
+            // 
+            // lblNameFilter
+            // 
+            this.lblNameFilter.AutoSize = true;
+            this.lblNameFilter.Location = new System.Drawing.Point(7, 20);
+            this.lblNameFilter.Name = "lblNameFilter";
+            this.lblNameFilter.Size = new System.Drawing.Size(35, 13);
+            this.lblNameFilter.TabIndex = 0;
+            this.lblNameFilter.Text = "Name";
             // 
             // lblUnique
             // 
@@ -302,23 +370,51 @@
             this.lblCarName.Size = new System.Drawing.Size(0, 20);
             this.lblCarName.TabIndex = 13;
             // 
-            // label1
+            // rbFTFAll
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(241, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "label1";
+            this.rbFTFAll.AutoSize = true;
+            this.rbFTFAll.Location = new System.Drawing.Point(0, 0);
+            this.rbFTFAll.Name = "rbFTFAll";
+            this.rbFTFAll.Size = new System.Drawing.Size(36, 17);
+            this.rbFTFAll.TabIndex = 5;
+            this.rbFTFAll.TabStop = true;
+            this.rbFTFAll.Text = "All";
+            this.rbFTFAll.UseVisualStyleBackColor = true;
+            this.rbFTFAll.CheckedChanged += new System.EventHandler(this.rbFTFAll_CheckedChanged);
             // 
-            // label2
+            // panelFileTypeFilter
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(241, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "label2";
+            this.panelFileTypeFilter.Controls.Add(this.rbFTFMod);
+            this.panelFileTypeFilter.Controls.Add(this.rbFTFVanilla);
+            this.panelFileTypeFilter.Controls.Add(this.rbFTFAll);
+            this.panelFileTypeFilter.Location = new System.Drawing.Point(59, 65);
+            this.panelFileTypeFilter.Name = "panelFileTypeFilter";
+            this.panelFileTypeFilter.Size = new System.Drawing.Size(158, 15);
+            this.panelFileTypeFilter.TabIndex = 6;
+            // 
+            // rbFTFVanilla
+            // 
+            this.rbFTFVanilla.AutoSize = true;
+            this.rbFTFVanilla.Location = new System.Drawing.Point(42, 0);
+            this.rbFTFVanilla.Name = "rbFTFVanilla";
+            this.rbFTFVanilla.Size = new System.Drawing.Size(56, 17);
+            this.rbFTFVanilla.TabIndex = 6;
+            this.rbFTFVanilla.TabStop = true;
+            this.rbFTFVanilla.Text = "Vanilla";
+            this.rbFTFVanilla.UseVisualStyleBackColor = true;
+            this.rbFTFVanilla.CheckedChanged += new System.EventHandler(this.rbFTFVanilla_CheckedChanged);
+            // 
+            // rbFTFMod
+            // 
+            this.rbFTFMod.AutoSize = true;
+            this.rbFTFMod.Location = new System.Drawing.Point(104, 0);
+            this.rbFTFMod.Name = "rbFTFMod";
+            this.rbFTFMod.Size = new System.Drawing.Size(46, 17);
+            this.rbFTFMod.TabIndex = 7;
+            this.rbFTFMod.TabStop = true;
+            this.rbFTFMod.Text = "Mod";
+            this.rbFTFMod.UseVisualStyleBackColor = true;
+            this.rbFTFMod.CheckedChanged += new System.EventHandler(this.rbFTFMod_CheckedChanged);
             // 
             // FormMain
             // 
@@ -339,7 +435,11 @@
             this.toolStrip1.PerformLayout();
             this.gbxPlaces.ResumeLayout(false);
             this.gbxPlaces.PerformLayout();
+            this.gbxFilter.ResumeLayout(false);
+            this.gbxFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudUnique)).EndInit();
+            this.panelFileTypeFilter.ResumeLayout(false);
+            this.panelFileTypeFilter.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,8 +468,16 @@
         private System.Windows.Forms.Label lblCarName;
         private System.Windows.Forms.Label lblUnique;
         private System.Windows.Forms.NumericUpDown nudUnique;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox gbxFilter;
+        private System.Windows.Forms.Label lblPlacesFilter;
+        private System.Windows.Forms.Label lblNameFilter;
+        private System.Windows.Forms.Label lblFileTypeFilter;
+        private System.Windows.Forms.ComboBox cmbNameFilter;
+        private System.Windows.Forms.TextBox tbxNameFilter;
+        private System.Windows.Forms.RadioButton rbFTFAll;
+        private System.Windows.Forms.Panel panelFileTypeFilter;
+        private System.Windows.Forms.RadioButton rbFTFVanilla;
+        private System.Windows.Forms.RadioButton rbFTFMod;
     }
 }
 

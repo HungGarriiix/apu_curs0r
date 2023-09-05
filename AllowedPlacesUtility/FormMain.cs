@@ -10,10 +10,18 @@ namespace APU
 {
     public partial class FormMain : Form
     {
+        CarFilter filter;
+
         public FormMain()
         {
             InitializeComponent();
         }
+
+        // might binding two-way controls later
+        /*public void BindingComponent()
+        {
+            cmbNameFilter.DataBindings.Add()
+        }*/
 
         private void SaveCar(Car c)
         {
@@ -66,7 +74,8 @@ namespace APU
                 MessageBox.Show("Unable to save " + c.Path);
             }
         }
-        private void FoundCar(string file,string name, string carpath)
+
+        private void FoundCar(string file,string name, string carpath, CarFilter filter)
         {
             Car c = new Car();
             c.Path = file;
@@ -76,6 +85,8 @@ namespace APU
                 if (line.ToLower().StartsWith("carversionname"))
                 {
                     c.Name = name + " " + line.Substring(line.IndexOf('=') + 1);
+                    if (!c.Name.ToLower().Contains(filter.NameFilter.ToLower()))
+                        return;
                 }
                 if (line.ToLower().StartsWith("uniquemod"))
                 {
@@ -117,13 +128,10 @@ namespace APU
 
             lvwCars.Items.Add(lvi);
         }
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            // Testing file address
-            label1.Text = Properties.Settings.Default.GamePath;
-            label2.Text = Properties.Settings.Default.ShopPath;
 
-            foreach (var carpath in Directory.EnumerateDirectories(Properties.Settings.Default.GamePath + @"\Car Mechanic Simulator 2021_Data\StreamingAssets\Cars\"))
+        private void FoundCars(string main_dir, CarFilter filter)
+        {
+            foreach (var carpath in Directory.EnumerateDirectories(main_dir))
             {
                 string cp = carpath + "\\";
                 string name = "Unnamed Car";
@@ -133,25 +141,45 @@ namespace APU
                 }
                 foreach (var file in Directory.EnumerateFiles(cp, "config*.txt"))
                 {
-                    FoundCar(file, name, carpath);
+                    FoundCar(file, name, carpath, filter);
                 }
             }
-            if (Directory.Exists(Properties.Settings.Default.ShopPath))
+        }
+
+        private CarFilter LoadDefaultFilterConfig()
+        {
+            return new CarFilter()
             {
-                foreach (var carpath in Directory.EnumerateDirectories(Properties.Settings.Default.ShopPath))
-                {
-                    string cp = carpath + "\\";
-                    string name = "Unnamed Car";
-                    if (File.Exists(cp + "name.txt"))
-                    {
-                        name = File.ReadAllText(cp + "name.txt");
-                    }
-                    foreach (var file in Directory.EnumerateFiles(cp, "config*.txt"))
-                    {
-                        FoundCar(file, name, carpath);
-                    }
-                }
+                SortMode = FileTypeSortMode.All,
+                NameSortOrder = SortOrder.Ascending,
+                NameFilter = String.Empty,
+            };
+        }
+
+        private void LoadCars(CarFilter filter)
+        {
+            lvwCars.Items.Clear();
+            if (filter.SortMode == FileTypeSortMode.Vanilla || filter.SortMode == FileTypeSortMode.All)
+            {
+                FoundCars(Properties.Settings.Default.GamePath + @"\Car Mechanic Simulator 2021_Data\StreamingAssets\Cars\", filter);
             }
+            if ((filter.SortMode == FileTypeSortMode.Mod || filter.SortMode == FileTypeSortMode.All) && Directory.Exists(Properties.Settings.Default.ShopPath))
+            {
+                FoundCars(Properties.Settings.Default.ShopPath, filter);
+            }  
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            filter = LoadDefaultFilterConfig();
+            // assigning default values for controls
+            tbxNameFilter.Text = filter.NameFilter;
+            cmbNameFilter.DataSource = Enum.GetValues(typeof(SortOrder));
+            // for some reason, this does not work at all
+/*            SortOrder so = filter.NameSortOrder;
+            cmbNameFilter.SelectedIndex = (int)so;*/
+            cmbNameFilter.SelectedItem = SortOrder.Ascending;
+            rbFTFAll.Checked = true;
         }
 
         private void lvwCars_SelectedIndexChanged(object sender, EventArgs e)
@@ -306,6 +334,40 @@ namespace APU
                 c.UniqueMod = (sender as NumericUpDown).Value;
                 SaveCar(c);
             }
+        }
+
+        private void cmbNameFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filter.NameSortOrder = (SortOrder)cmbNameFilter.SelectedItem;
+            lvwCars.Sorting = filter.NameSortOrder;
+            LoadCars(filter);
+        }
+
+        private void tbxNameFilter_TextChanged(object sender, EventArgs e)
+        {
+            filter.NameFilter = (sender as TextBox).Text;
+            LoadCars(filter);
+        }
+
+        private void rbFTFAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbFTFAll.Checked)
+                filter.SortMode = FileTypeSortMode.All;
+            LoadCars(filter);
+        }
+
+        private void rbFTFVanilla_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbFTFVanilla.Checked)
+                filter.SortMode = FileTypeSortMode.Vanilla;
+            LoadCars(filter);
+        }
+
+        private void rbFTFMod_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbFTFMod.Checked)
+                filter.SortMode = FileTypeSortMode.Mod;
+            LoadCars(filter);
         }
     }
 }
