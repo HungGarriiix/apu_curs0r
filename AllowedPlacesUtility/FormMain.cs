@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace APU
 {
-    public partial class FormMain : Form
+    public partial class AllowedPlacesUtilityCMS2021 : Form
     {
         CarFilter filter;
 
-        public FormMain()
+        public AllowedPlacesUtilityCMS2021()
         {
             InitializeComponent();
         }
@@ -38,32 +39,32 @@ namespace APU
                     }
                     if (line.ToLower().StartsWith("allowedplaces"))
                     {
-                        lines[i] = line
-                            .Replace("Junkyard", "")
-                            .Replace("Auction", "")
-                            .Replace("Shed", "")
-                            .Replace("Salon", "")
-                            .Replace("junkyard", "")
-                            .Replace("auction", "")
-                            .Replace("shed", "")
-                            .Replace("salon", "")
-                            .Replace(",", "");
+                        lines[i] = line.Substring(0, line.IndexOf("=") + 1);
+                        // original mess (in comment)
+                        /*line
+                        *//*.Replace("Order.*,", "")
+                        .Replace("Junkyard", "")
+                        .Replace("Auction", "")
+                        .Replace("Shed", "")
+                        .Replace("Salon", "")
+                        .Replace("order.*,", "")
+                        .Replace("junkyard", "")
+                        .Replace("auction", "")
+                        .Replace("shed", "")
+                        .Replace("salon", "")
+                        .Replace(",", "");*//*
+                        .Replace("allowedPlaces=*", "allowedPlaces=");*/
+
+                        if (c.Order)
+                            lines[i] += $"Order.{c.OrderNo},";
                         if (c.Junkyard)
-                        {
-                            lines[i] += ",Junkyard";
-                        }
+                            lines[i] += "Junkyard,";
                         if (c.Auction)
-                        {
-                            lines[i] += ",Auction";
-                        }
+                            lines[i] += "Auction,";
                         if (c.Salon)
-                        {
-                            lines[i] += ",Salon";
-                        }
+                            lines[i] += "Salon,";
                         if (c.Shed)
-                        {
-                            lines[i] += ",Shed";
-                        }
+                            lines[i] += "Shed,";
                     }
                     i++;
                 }
@@ -104,6 +105,9 @@ namespace APU
                     {
                         switch (place.ToLower())
                         {
+/*                            case "order.*":
+                                c.OrderNo = int.Parse(place.Substring(line.IndexOf ('.') + 1));
+                                break;*/
                             case "shed":
                                 c.Shed = true;
                                 break;
@@ -117,6 +121,10 @@ namespace APU
                                 c.Salon = true;
                                 break;
                             default:
+                                if (place.ToLower().Contains("order"))
+                                {
+                                    c.OrderNo = int.Parse(place.Substring(place.IndexOf('.') + 1));
+                                }
                                 break;
                         }
                     }
@@ -193,6 +201,10 @@ namespace APU
                 chkJunk.Checked = c.Junkyard;
                 chkSalon.Checked = c.Salon;
                 chkShed.Checked = c.Shed;
+                nudOrder.ValueChanged -= nudOrder_ValueChanged; // avoid numeric ud affects to the car when value accidentally changed
+                nudOrder.Value = c.OrderNo;
+                nudOrder.ValueChanged += nudOrder_ValueChanged;
+                chkOrder.Checked = c.Order;
                 //pbxCarImage.Image = c.Image;
                 lblCarName.Text = c.Name;
             }
@@ -234,6 +246,26 @@ namespace APU
             {
                 Car c = (lvwCars.SelectedItems[0].Tag as Car);
                 c.Shed = (sender as CheckBox).Checked;
+                SaveCar(c);
+            }
+        }
+
+        private void chkOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            if (lvwCars.SelectedItems.Count > 0)
+            {
+                Car c = (lvwCars.SelectedItems[0].Tag as Car);
+                c.OrderNo = (chkOrder.Checked) ? (int)nudOrder.Value : 0;
+                SaveCar(c);
+            }
+        }
+
+        private void nudOrder_ValueChanged(object sender, EventArgs e)
+        {
+            if (lvwCars.SelectedItems.Count > 0)
+            {
+                Car c = (lvwCars.SelectedItems[0].Tag as Car);
+                c.OrderNo = (chkOrder.Checked) ? (int)nudOrder.Value : 0;
                 SaveCar(c);
             }
         }
@@ -369,5 +401,7 @@ namespace APU
                 filter.SortMode = FileTypeSortMode.Mod;
             LoadCars(filter);
         }
+
+        
     }
 }

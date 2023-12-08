@@ -8,6 +8,8 @@ namespace APU
         public string Year { get; set; }
         public string Path { get; set; }
         public Image Image { get; set; }
+        public bool Order { get { return OrderNo > 0; } }
+        public int OrderNo { get; set; }
         public bool Auction { get; set; }
         public bool Junkyard { get; set; }
         public bool Salon { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace APU
 {
-    partial class FormMain
+    partial class AllowedPlacesUtilityCMS2021
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllowedPlacesUtilityCMS2021));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslSalon = new System.Windows.Forms.ToolStripLabel();
             this.tsbSalonAll = new System.Windows.Forms.ToolStripButton();
@@ -44,7 +44,13 @@
             this.tsbBarnsNone = new System.Windows.Forms.ToolStripButton();
             this.lvwCars = new System.Windows.Forms.ListView();
             this.gbxPlaces = new System.Windows.Forms.GroupBox();
+            this.nudOrder = new System.Windows.Forms.NumericUpDown();
+            this.chkOrder = new System.Windows.Forms.CheckBox();
             this.gbxFilter = new System.Windows.Forms.GroupBox();
+            this.panelFileTypeFilter = new System.Windows.Forms.Panel();
+            this.rbFTFMod = new System.Windows.Forms.RadioButton();
+            this.rbFTFVanilla = new System.Windows.Forms.RadioButton();
+            this.rbFTFAll = new System.Windows.Forms.RadioButton();
             this.tbxNameFilter = new System.Windows.Forms.TextBox();
             this.cmbNameFilter = new System.Windows.Forms.ComboBox();
             this.lblFileTypeFilter = new System.Windows.Forms.Label();
@@ -57,15 +63,12 @@
             this.chkSalon = new System.Windows.Forms.CheckBox();
             this.chkAuction = new System.Windows.Forms.CheckBox();
             this.lblCarName = new System.Windows.Forms.Label();
-            this.rbFTFAll = new System.Windows.Forms.RadioButton();
-            this.panelFileTypeFilter = new System.Windows.Forms.Panel();
-            this.rbFTFVanilla = new System.Windows.Forms.RadioButton();
-            this.rbFTFMod = new System.Windows.Forms.RadioButton();
             this.toolStrip1.SuspendLayout();
             this.gbxPlaces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudOrder)).BeginInit();
             this.gbxFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudUnique)).BeginInit();
             this.panelFileTypeFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUnique)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -213,6 +216,8 @@
             // 
             // gbxPlaces
             // 
+            this.gbxPlaces.Controls.Add(this.nudOrder);
+            this.gbxPlaces.Controls.Add(this.chkOrder);
             this.gbxPlaces.Controls.Add(this.gbxFilter);
             this.gbxPlaces.Controls.Add(this.lblUnique);
             this.gbxPlaces.Controls.Add(this.nudUnique);
@@ -228,6 +233,30 @@
             this.gbxPlaces.TabStop = false;
             this.gbxPlaces.Text = "Allowed Places";
             // 
+            // nudOrder
+            // 
+            this.nudOrder.Location = new System.Drawing.Point(109, 75);
+            this.nudOrder.Name = "nudOrder";
+            this.nudOrder.Size = new System.Drawing.Size(53, 20);
+            this.nudOrder.TabIndex = 14;
+            this.nudOrder.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudOrder.ValueChanged += new System.EventHandler(this.nudOrder_ValueChanged);
+            // 
+            // chkOrder
+            // 
+            this.chkOrder.AutoSize = true;
+            this.chkOrder.Location = new System.Drawing.Point(23, 76);
+            this.chkOrder.Name = "chkOrder";
+            this.chkOrder.Size = new System.Drawing.Size(69, 17);
+            this.chkOrder.TabIndex = 13;
+            this.chkOrder.Text = "OrderNo.";
+            this.chkOrder.UseVisualStyleBackColor = true;
+            this.chkOrder.CheckedChanged += new System.EventHandler(this.chkOrder_CheckedChanged);
+            // 
             // gbxFilter
             // 
             this.gbxFilter.Controls.Add(this.panelFileTypeFilter);
@@ -242,6 +271,52 @@
             this.gbxFilter.TabIndex = 12;
             this.gbxFilter.TabStop = false;
             this.gbxFilter.Text = "Filter";
+            // 
+            // panelFileTypeFilter
+            // 
+            this.panelFileTypeFilter.Controls.Add(this.rbFTFMod);
+            this.panelFileTypeFilter.Controls.Add(this.rbFTFVanilla);
+            this.panelFileTypeFilter.Controls.Add(this.rbFTFAll);
+            this.panelFileTypeFilter.Location = new System.Drawing.Point(59, 65);
+            this.panelFileTypeFilter.Name = "panelFileTypeFilter";
+            this.panelFileTypeFilter.Size = new System.Drawing.Size(158, 15);
+            this.panelFileTypeFilter.TabIndex = 6;
+            // 
+            // rbFTFMod
+            // 
+            this.rbFTFMod.AutoSize = true;
+            this.rbFTFMod.Location = new System.Drawing.Point(104, 0);
+            this.rbFTFMod.Name = "rbFTFMod";
+            this.rbFTFMod.Size = new System.Drawing.Size(46, 17);
+            this.rbFTFMod.TabIndex = 7;
+            this.rbFTFMod.TabStop = true;
+            this.rbFTFMod.Text = "Mod";
+            this.rbFTFMod.UseVisualStyleBackColor = true;
+            this.rbFTFMod.CheckedChanged += new System.EventHandler(this.rbFTFMod_CheckedChanged);
+            // 
+            // rbFTFVanilla
+            // 
+            this.rbFTFVanilla.AutoSize = true;
+            this.rbFTFVanilla.Location = new System.Drawing.Point(42, 0);
+            this.rbFTFVanilla.Name = "rbFTFVanilla";
+            this.rbFTFVanilla.Size = new System.Drawing.Size(56, 17);
+            this.rbFTFVanilla.TabIndex = 6;
+            this.rbFTFVanilla.TabStop = true;
+            this.rbFTFVanilla.Text = "Vanilla";
+            this.rbFTFVanilla.UseVisualStyleBackColor = true;
+            this.rbFTFVanilla.CheckedChanged += new System.EventHandler(this.rbFTFVanilla_CheckedChanged);
+            // 
+            // rbFTFAll
+            // 
+            this.rbFTFAll.AutoSize = true;
+            this.rbFTFAll.Location = new System.Drawing.Point(0, 0);
+            this.rbFTFAll.Name = "rbFTFAll";
+            this.rbFTFAll.Size = new System.Drawing.Size(36, 17);
+            this.rbFTFAll.TabIndex = 5;
+            this.rbFTFAll.TabStop = true;
+            this.rbFTFAll.Text = "All";
+            this.rbFTFAll.UseVisualStyleBackColor = true;
+            this.rbFTFAll.CheckedChanged += new System.EventHandler(this.rbFTFAll_CheckedChanged);
             // 
             // tbxNameFilter
             // 
@@ -290,7 +365,7 @@
             // lblUnique
             // 
             this.lblUnique.AutoSize = true;
-            this.lblUnique.Location = new System.Drawing.Point(20, 80);
+            this.lblUnique.Location = new System.Drawing.Point(20, 106);
             this.lblUnique.Name = "lblUnique";
             this.lblUnique.Size = new System.Drawing.Size(62, 13);
             this.lblUnique.TabIndex = 11;
@@ -304,7 +379,7 @@
             0,
             0,
             65536});
-            this.nudUnique.Location = new System.Drawing.Point(109, 78);
+            this.nudUnique.Location = new System.Drawing.Point(109, 104);
             this.nudUnique.Maximum = new decimal(new int[] {
             999,
             0,
@@ -370,53 +445,7 @@
             this.lblCarName.Size = new System.Drawing.Size(0, 20);
             this.lblCarName.TabIndex = 13;
             // 
-            // rbFTFAll
-            // 
-            this.rbFTFAll.AutoSize = true;
-            this.rbFTFAll.Location = new System.Drawing.Point(0, 0);
-            this.rbFTFAll.Name = "rbFTFAll";
-            this.rbFTFAll.Size = new System.Drawing.Size(36, 17);
-            this.rbFTFAll.TabIndex = 5;
-            this.rbFTFAll.TabStop = true;
-            this.rbFTFAll.Text = "All";
-            this.rbFTFAll.UseVisualStyleBackColor = true;
-            this.rbFTFAll.CheckedChanged += new System.EventHandler(this.rbFTFAll_CheckedChanged);
-            // 
-            // panelFileTypeFilter
-            // 
-            this.panelFileTypeFilter.Controls.Add(this.rbFTFMod);
-            this.panelFileTypeFilter.Controls.Add(this.rbFTFVanilla);
-            this.panelFileTypeFilter.Controls.Add(this.rbFTFAll);
-            this.panelFileTypeFilter.Location = new System.Drawing.Point(59, 65);
-            this.panelFileTypeFilter.Name = "panelFileTypeFilter";
-            this.panelFileTypeFilter.Size = new System.Drawing.Size(158, 15);
-            this.panelFileTypeFilter.TabIndex = 6;
-            // 
-            // rbFTFVanilla
-            // 
-            this.rbFTFVanilla.AutoSize = true;
-            this.rbFTFVanilla.Location = new System.Drawing.Point(42, 0);
-            this.rbFTFVanilla.Name = "rbFTFVanilla";
-            this.rbFTFVanilla.Size = new System.Drawing.Size(56, 17);
-            this.rbFTFVanilla.TabIndex = 6;
-            this.rbFTFVanilla.TabStop = true;
-            this.rbFTFVanilla.Text = "Vanilla";
-            this.rbFTFVanilla.UseVisualStyleBackColor = true;
-            this.rbFTFVanilla.CheckedChanged += new System.EventHandler(this.rbFTFVanilla_CheckedChanged);
-            // 
-            // rbFTFMod
-            // 
-            this.rbFTFMod.AutoSize = true;
-            this.rbFTFMod.Location = new System.Drawing.Point(104, 0);
-            this.rbFTFMod.Name = "rbFTFMod";
-            this.rbFTFMod.Size = new System.Drawing.Size(46, 17);
-            this.rbFTFMod.TabIndex = 7;
-            this.rbFTFMod.TabStop = true;
-            this.rbFTFMod.Text = "Mod";
-            this.rbFTFMod.UseVisualStyleBackColor = true;
-            this.rbFTFMod.CheckedChanged += new System.EventHandler(this.rbFTFMod_CheckedChanged);
-            // 
-            // FormMain
+            // AllowedPlacesUtilityCMS2021
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -427,7 +456,7 @@
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "FormMain";
+            this.Name = "AllowedPlacesUtilityCMS2021";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "AllowedPlaces Utility For CMS2021";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -435,11 +464,12 @@
             this.toolStrip1.PerformLayout();
             this.gbxPlaces.ResumeLayout(false);
             this.gbxPlaces.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudOrder)).EndInit();
             this.gbxFilter.ResumeLayout(false);
             this.gbxFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudUnique)).EndInit();
             this.panelFileTypeFilter.ResumeLayout(false);
             this.panelFileTypeFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUnique)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,6 +508,8 @@
         private System.Windows.Forms.Panel panelFileTypeFilter;
         private System.Windows.Forms.RadioButton rbFTFVanilla;
         private System.Windows.Forms.RadioButton rbFTFMod;
+        private System.Windows.Forms.NumericUpDown nudOrder;
+        private System.Windows.Forms.CheckBox chkOrder;
     }
 }
 

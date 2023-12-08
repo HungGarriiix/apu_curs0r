@@ -66,11 +66,11 @@ namespace APU
                     Environment.Exit(404);
 
                 Properties.Settings.Default.Save();
-                Application.Run(new FormMain());
+                Application.Run(new AllowedPlacesUtilityCMS2021());
             }
             else
             {
-                Application.Run(new FormMain());
+                Application.Run(new AllowedPlacesUtilityCMS2021());
             }
         }
         private static string SteamPath()
