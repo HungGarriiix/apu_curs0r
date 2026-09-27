@@ -1,4 +1,4 @@
-# AllowedPlaces Utility for CMS2018
+# AllowedPlaces Utility for CMS2022
 A simple utility for changing the locations that cars appear in Car Mechanic Simulator 2018
 
 Copyright 2017 Curs0r
